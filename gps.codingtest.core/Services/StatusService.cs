@@ -1,32 +1,28 @@
-﻿using System;
+﻿using gps.codingtest.core.ServiceInterfaces;
+using System;
 using System.Collections.Generic;
 
 namespace gps.codingtest.core.Services
 {
-    public class StatusService
+    public class StatusService : IStatusService
     {
-        public static Dictionary<Guid, string> MessageStatusDictionary;
+        private readonly Dictionary<Guid, string> _messageStatusDictionary;
 
-        public static void SetStatus(Guid id, string status)
+        public StatusService()
         {
-            if (MessageStatusDictionary == null)
-            {
-                MessageStatusDictionary = new Dictionary<Guid, string>();
-            }
-
-            MessageStatusDictionary.Add(id, status);
+            _messageStatusDictionary = new Dictionary<Guid, string>();
         }
 
-        public static string GetStatus(Guid id)
-        {
-            if (MessageStatusDictionary == null)
-            {
-                throw new ApplicationException("No status set");
-            }
+        public void SetStatus(Guid id, string status)
+        {        
+            _messageStatusDictionary.Add(id, status);
+        }
 
-            if (MessageStatusDictionary.ContainsKey(id))
+        public string GetStatus(Guid id)
+        {
+            if (_messageStatusDictionary.ContainsKey(id))
             {
-                return MessageStatusDictionary[id];
+                return _messageStatusDictionary[id];
             }
 
             return string.Empty;

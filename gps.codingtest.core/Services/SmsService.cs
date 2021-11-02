@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using gps.codingtest.core.ServiceInterfaces;
 
 namespace gps.codingtest.core.Services
 {
-    public class SmsService
+    public class SmsService : ISmsService
     {
         public bool IsServiceRunning()
         {
@@ -13,17 +11,17 @@ namespace gps.codingtest.core.Services
 
         public bool Send(string to, string from, string message)
         {
-            if (!string.IsNullOrEmpty(to))
+            if (string.IsNullOrEmpty(to))
             {
                 throw new FailureToSendException("To field is required");
             }
 
-            if (!string.IsNullOrEmpty(from))
+            if (string.IsNullOrEmpty(from))
             {
                 throw new FailureToSendException("To field is required");
-            }
+            }            
 
-            if (!string.IsNullOrEmpty(message))
+            if (string.IsNullOrEmpty(message))
             {
                 throw new FailureToSendException("Message field is required");
             }
