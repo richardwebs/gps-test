@@ -12,7 +12,7 @@ namespace gps.codingtest.core.Models
             smsService = new SmsService();
         }
 
-        public bool send(NotificationEvent notificationEvent, out string error)
+        public bool Send(NotificationEvent notificationEvent, out string error)
         {
             bool result = false;
             error = string.Empty;

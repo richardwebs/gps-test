@@ -7,10 +7,13 @@ namespace gps.codingtest.core
     {
         public Guid Id { get; set; } = new Guid();
 
+        [Required]
         public string To { get; set; }
 
+        [Required]
         public string From { get; set; }
 
+        [Required]
         public string Message { get; set; }
 
         [Required]

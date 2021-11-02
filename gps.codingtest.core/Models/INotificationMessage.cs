@@ -5,6 +5,6 @@ namespace gps.codingtest.core.Models
 {
     public interface INotificationMessage
     {
-        bool send(NotificationEvent notificationEvent, out string error);
+        bool Send(NotificationEvent notificationEvent, out string error);
     }
 }
