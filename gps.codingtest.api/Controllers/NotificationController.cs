@@ -1,13 +1,18 @@
 ﻿using gps.codingtest.core.Models;
 using gps.codingtest.core.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace gps.codingtest.api.Controllers
 {
+    public interface INotificationController
+    {
+        IActionResult SendEmailNotification(EmailNotificationEvent notificationEvent);
+        IActionResult SendSmsNotification(SmsNotificationEvent notificationEvent);
+    }
+    
     [Route("[controller]")]
     [ApiController]
-    public class NotificationController : ControllerBase
+    public class NotificationController : ControllerBase, INotificationController
     {
         private readonly IEmailNotificationService _emailNotificationService;
         private readonly ISmsNotificationService _smsNotificationService;        
@@ -20,35 +25,30 @@ namespace gps.codingtest.api.Controllers
 
         [HttpPost]
         [Route("sendEmailNotification")]
-        public async Task<IActionResult> SendEmailNotification([FromBody] EmailNotificationEvent notificationEvent)
-        {
-            return await Task.Run(() => {
-                var result = _emailNotificationService.Send(notificationEvent, out var errormessage);
+        public IActionResult SendEmailNotification( EmailNotificationEvent notificationEvent)
+        {            
+            var result = _emailNotificationService.Send(notificationEvent, out var errormessage);
 
-                if (!result)
-                {
-                    BadRequest(errormessage);
-                }
+            if (!result)
+            {
+                return BadRequest(errormessage);
+            }
 
-                return Ok("Message Sent");
-            });
+            return Ok("Message Sent");            
         }
 
         [HttpPost]
         [Route("sendSmsNotification")]
-        public async Task<IActionResult> SendSmsNotification([FromBody] SmsNotificationEvent notificationEvent)
+        public IActionResult SendSmsNotification(SmsNotificationEvent notificationEvent)
         {
-            return await Task.Run(() => {
+            var result = _smsNotificationService.Send(notificationEvent, out var errormessage);
 
-                var result = _smsNotificationService.Send(notificationEvent, out var errormessage);
+            if (!result)
+            {
+                return BadRequest(errormessage);
+            }
 
-                if (!result)
-                {
-                    BadRequest(errormessage);
-                }
-
-                return Ok("Message Sent");
-            });
+            return Ok("Message Sent");            
         }               
     }
 }

@@ -1,6 +1,5 @@
 ﻿using gps.codingtest.core.Models;
 using gps.codingtest.core.ServiceInterfaces;
-using gps.codingtest.core.ServiceInterfaces;
 using System;
 
 namespace gps.codingtest.core.Services

@@ -5,9 +5,14 @@ using System.Threading.Tasks;
 
 namespace gps.codingtest.api.Controllers
 {
+    public interface IStatusController
+    {
+        Task<IActionResult> GetStatus([FromRoute] Guid id);
+    }
+
     [Route("[controller]")]
     [ApiController]
-    public class StatusController : ControllerBase
+    public class StatusController : ControllerBase, IStatusController
     {
         private readonly IStatusService _statusService;
 

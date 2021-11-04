@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\gps.codingtest.api\gps.codingtest.api.csproj" />
     <ProjectReference Include="..\gps.codingtest.core\gps.codingtest.core.csproj" />
   </ItemGroup>
 

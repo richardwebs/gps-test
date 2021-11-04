@@ -2,7 +2,7 @@
 
  
 
-We would like you to refactor the GPS.CodingTest Solution. It contains a Notification API that will receive notifications of different types. Each notification type needs to be received and processed separately. There is also a class library and a unit test project included in the solution.
+We would like you to refactor the `GPS.CodingTest` Solution. It contains a Notification API that will receive notifications of different types. Each notification type needs to be received and processed separately. There is also a class library and a unit test project included in the solution.
 
  
 
@@ -15,7 +15,7 @@ We would like you to refactor the GPS.CodingTest Solution. It contains a Notific
  
 
 - Refactor the send Notification endpoint and any services it uses, keep in mind what design patterns 
-- Complete the implementation of the EmailNotificationMessage
+- Complete the implementation of the `EmailNotificationMessage`
 - Review the Status endpoint and think how you would redesign (implementation not essential)
 - Add as many units test as you like
 
@@ -41,4 +41,6 @@ You can add any framework(s) / NuGet packages of your choice to improve the code
 8. The `INotificationMessage` interface doesn't belong in the Models folder.
 9. Make controller methods either properly `async` or just take the `async` away for the time being because it is confusing.
 10. The service classes: `SmsNotificationMessage`, `INotificationMessage` and `EmailNotificationMessage` belong in the Services folder. They also have confusing names, rename appropriately.
+11. Aim for full coverage of tests in combinations of integration tests and unit tests. 
+12. Lowest classes in the hierarchy (repositories, providers, adapters) will typically have integration tests because there is nothing important to mock. Service classes further up the chain (managers, helpers) and controllers will typically be unit tested because there will be more injected classes to mock.
 
